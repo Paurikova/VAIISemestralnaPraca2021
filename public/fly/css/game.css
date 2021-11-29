@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.playground {
+    background-image: url("../../files/Game/bookShelwes.jpg");
+    z-index: -1;
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.book {
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    position: fixed;
+}
+
+#box {
+    background-image: url("../../files/Game/cartoonBox.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 200px;
+    height: 200px;
+    top: 500px;
+    position: fixed;
+}
+
+.catching {
+    background-image: url("../../files/Game/stars1.png");
+}
+
+#menu {
+    background-color: #e53935;
+    border: 3px solid black;
+    padding: 10px;
+    position: fixed;
+    left: 40vw;
+}
+#menu div {
+    display: inline-block;
+    border: 1px solid white;
+    padding: 4px;
+}
+
+.gameRow{
+    text-left: 0px;
+}
+#start {
+    background-color: red;
+    cursor: pointer;
+}
