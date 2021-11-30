@@ -13,14 +13,18 @@ class PinController extends AControllerRedirect
 
     public function index()
     {
-        //nope
+        if (Auth::isLogged()) {
+            $this->redirect('pin','pin');
+        } else {
+            $this->redirect('news','news');
+        }
     }
 
     public function pin()
     {
         try {
             if (!Auth::isLogged()) {
-                $this->redirect('home');
+                $this->redirect('news','news');
             }
 
             $news = News::getAll();
@@ -38,7 +42,7 @@ class PinController extends AControllerRedirect
 
     public function newPin() {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
 
         return $this->html(
@@ -49,7 +53,7 @@ class PinController extends AControllerRedirect
 
     public function addPin() {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
         $title = $this->request()->getValue('title');
         $text =$this->request()->getValue('text');
@@ -74,7 +78,7 @@ class PinController extends AControllerRedirect
 
     public function modifyPin() {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
         try {
             $mypins = Pin::getAll('userID = ?', [$_SESSION['userID']]);
@@ -93,7 +97,7 @@ class PinController extends AControllerRedirect
 
     public function changePin() {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
 
         try {
@@ -110,7 +114,7 @@ class PinController extends AControllerRedirect
                 if ($stars != null and Pin::controlStars($stars)) {
                     $changePin->setStars($stars);
                 }
-                    $changePin->save();
+                $changePin->save();
                 $this->redirect('pin','pin');
             } else {
                 $this->redirect('pin','modifyPin',['error' => 'Incorrect data']);
@@ -121,6 +125,9 @@ class PinController extends AControllerRedirect
     }
 
     public function deletePin() {
+        if (!Auth::isLogged()) {
+            $this->redirect('news','news');
+        }
         try {
             $pin = Pin::getOne($this->request()->getValue('deletedPin'));
              if ($pin != null) {

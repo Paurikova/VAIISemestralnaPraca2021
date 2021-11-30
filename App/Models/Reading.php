@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Model;
+use http\Env\Request;
 
 class Reading extends Model
 {
@@ -124,5 +125,18 @@ class Reading extends Model
     public static function correctTime($minute, $hour) :bool
     {
         return is_numeric($minute) and is_numeric($hour) and $hour >= 0 and $hour <= 24 and $minute >= 0 and $minute <= 59;
+    }
+
+    public static function deleteAll(): bool
+    {
+        try {
+            $all = Reading::getAll('userID = ?', [$_SESSION['userID']]);
+            foreach ($all as $one) {
+                $one->delete();
+            }
+            return true;
+        }catch (\Exception $e) {
+            return false;
+        }
     }
 }

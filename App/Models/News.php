@@ -11,6 +11,7 @@ class News extends Model
         public ?string $title = null,
         public ?string $author = null,
         public ?string $text = null,
+        public ?string $pictureTitle = null,
         public ?string $picture1 = null,
         public ?string $picture2 = null,
         public ?string $picture3 = null
@@ -20,7 +21,7 @@ class News extends Model
 
     static public function setDbColumns()
     {
-        return ['id','title','author','text','picture1','picture2','picture3'];
+        return ['id','title','author','text','pictureTitle','picture1','picture2','picture3'];
     }
 
     static public function setTableName()
@@ -90,6 +91,22 @@ class News extends Model
     public function setText(?string $text): void
     {
         $this->text = $text;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPictureTitle(): ?string
+    {
+        return $this->pictureTitle;
+    }
+
+    /**
+     * @param string|null $pictureTitle
+     */
+    public function setPictureTitle(?string $pictureTitle): void
+    {
+        $this->pictureTitle = $pictureTitle;
     }
 
     /**

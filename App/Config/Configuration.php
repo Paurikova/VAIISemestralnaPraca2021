@@ -20,7 +20,9 @@ class Configuration
 
     public const DEBUG_QUERY = false;
 
-    public const UPLOAD_DIR = 'public/files/';
+    public const UPLOAD_DIR = 'public/files/Pins/';
+    public const UPLOAD_DIR_NEWS = 'public/files/News/';
+    public const UPLOAD_DIR_CHALLENGES = 'public/files/Challenges/';
 
     public const MAX_LENGTH_30= 30;
     public const MAX_LENGTH_95 = 95;

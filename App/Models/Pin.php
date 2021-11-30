@@ -143,4 +143,17 @@ class Pin extends Model
     {
         return  (is_numeric($stars)) and ($stars >= 0 and $stars <= 5);
     }
+
+    public static function deleteAll(): bool
+    {
+        try {
+            $all = Pin::getAll('userID = ?', [$_SESSION['userID']]);
+            foreach ($all as $one) {
+                $one->delete();
+            }
+            return true;
+        }catch (\Exception $e) {
+            return false;
+        }
+    }
 }

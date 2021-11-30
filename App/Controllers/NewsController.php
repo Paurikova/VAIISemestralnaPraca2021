@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Auth;
 use App\Core\Responses\Response;
 use App\Models\News;
 
@@ -9,11 +10,18 @@ class NewsController extends AControllerRedirect
 {
     public function index()
     {
-        //nope
+        if (Auth::isLogged()) {
+            $this->redirect('pin','pin');
+        } else {
+            $this->redirect('news','news');
+        }
     }
 
     public function news()
     {
+        if (Auth::isLogged()) {
+            $this->redirect('pin','pin');
+        }
         try {
             $news = News::getAll();
         } catch (\Exception $e) {

@@ -14,13 +14,17 @@ class ChallengeController extends AControllerRedirect
 
     public function index()
     {
-        //nope
+        if (Auth::isLogged()) {
+            $this->redirect('pin','pin');
+        } else {
+            $this->redirect('news','news');
+        }
     }
 
     public function challenge()
     {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
         try {
             $news = News::getAll();
@@ -41,7 +45,7 @@ class ChallengeController extends AControllerRedirect
 
     public function newChallenge() {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
 
         try {
@@ -62,7 +66,7 @@ class ChallengeController extends AControllerRedirect
 
     public function addChallenge() {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
 
         $newChallenge = new MyChallenge();
@@ -77,6 +81,9 @@ class ChallengeController extends AControllerRedirect
     }
 
     public function deleteChallenge() {
+        if (!Auth::isLogged()) {
+            $this->redirect('news','news');
+        }
         try {
             $challenge = MyChallenge::getAll('challengeID = ?', [$this->request()->getValue('deletedChallenge')]);
             $mychallenge = $challenge[0];

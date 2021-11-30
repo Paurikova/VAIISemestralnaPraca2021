@@ -1,6 +1,6 @@
 class Box {
     box = document.getElementById('box');
-    actualLeft = window.outerWidth / 2 ;
+    actualLeft = 0;
 
     constructor() {
         this.box.style.left = this.actualLeft + "px";

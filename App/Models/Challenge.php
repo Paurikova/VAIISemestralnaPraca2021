@@ -11,6 +11,7 @@ class Challenge extends Model
         public ?string $title = null,
         public ?string $text = null,
         public ?string $picture = null
+        //chyba pocet knih
     )
     {
     }
@@ -88,5 +89,4 @@ class Challenge extends Model
     {
         $this->picture = $picture;
     }
-
 }

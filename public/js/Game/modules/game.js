@@ -4,15 +4,17 @@ import { Box} from "./box.js";
 
 class Game {
     totalBooks = 20;
-    actualBooks = 0;
-    caughtBooks = 0;
+    actualBooks;
+    caughtBooks;
     books = [];
     box = new Box();
-    gameSeconds = this.totalBooks + 13;
-    timer = new Timer();
+    gameSeconds;
+    timer;
+    game;
+    numberOfGames = 0;
 
     constructor() {
-        this.timer.callback = () => this.gameTick();
+        this.inicialization();
         document.addEventListener("DOMContentLoaded", (event) => {
             document.getElementById("start").onclick = () => this.start();
             for (let i = 0; i < this.totalBooks; i++) {
@@ -20,6 +22,15 @@ class Game {
             }
         });
         document.addEventListener('keydown',(evt) => this.control(this.box,this.books,evt));
+    }
+
+    inicialization() {
+        this.actualBooks = 0;
+        this.caughtBooks = 0;
+        this.gameSeconds = this.totalBooks + 13;
+        this.timer = new Timer();
+        this.game = true;
+        this.timer.callback = () => this.gameTick();
     }
 
     control(box, books, evt) {
@@ -35,7 +46,7 @@ class Game {
     controlCatch(box, books) {
         for (let i = 0; i < books.length; i++) {
             if (this.controlBook(books[i],box)) {
-                books[i].setPicture();
+                books[i].hideBook();
                 this.bookCatch();
             }
         }
@@ -46,7 +57,7 @@ class Game {
         let boxY = box.getPosition().y;
         let x = book.getPosition().x;
         let y = book.getPosition().y;
-        if (boxX <= x && boxX + 100 >= x && boxY - 30 <= y && boxY + 30 >= y && book.getActive()) {
+        if (boxX <= x && boxX + 150 >= x && boxY - 50 <= y && boxY + 50 >= y && book.getActive()) {
             book.setActive();
             return true;
         } else {
@@ -68,9 +79,15 @@ class Game {
             }
             this.redrawScore();
         } else {
-            this.timer.stop();
+            this.stop();
         }
         document.getElementById("timer").innerText = this.gameSeconds.toString();
+    }
+
+    stop() {
+        this.timer.stop();
+        this.game = true;
+        this.numberOfGames++;
     }
 
     redrawScore() {
@@ -78,8 +95,14 @@ class Game {
     }
 
     start() {
-        this.redrawScore();
-        this.timer.start();
+        if (this.game) {
+            if (this.numberOfGames != 0 ) {
+                this.inicialization();
+            }
+            this.redrawScore();
+            this.timer.start();
+            this.game = false;
+        }
     }
 }
 export {Game};

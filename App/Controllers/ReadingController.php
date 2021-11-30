@@ -12,21 +12,50 @@ class ReadingController extends AControllerRedirect
 
     public function index()
     {
-        //nope
+        if (Auth::isLogged()) {
+            $this->redirect('pin','pin');
+        } else {
+            $this->redirect('news','news');
+        }
     }
 
     public function reading()
     {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
         try {
             $news = News::getAll();
+            $year = date("Y");
+            $January = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'1',$year]);
+            $February = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'2',$year]);
+            $March = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'3',$year]);
+            $April = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'4',$year]);
+            $May = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'5',$year]);
+            $June = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'6',$year]);
+            $July = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'7',$year]);
+            $August = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'8',$year]);
+            $September = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'9',$year]);
+            $October = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'10',$year]);
+            $November = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'11',$year]);
+            $December = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'12',$year]);
         } catch (\Exception $e) {
             $this->redirect('reading','reading',['error' => $e->getMessage()]);
         }
         return $this->html(
             [
+                'January' => $January,
+                'February' => $February,
+                'March' => $March,
+                'April' => $April,
+                'May' => $May,
+                'June' => $June,
+                'July' => $July,
+                'August' => $August,
+                'September' => $September,
+                'October' => $October,
+                'November' => $November,
+                'December' => $December,
                 'error' => $this->request()->getValue('error'),
                 'news' => $news
             ]
@@ -35,7 +64,7 @@ class ReadingController extends AControllerRedirect
 
     public function addReading(){
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
         try {
             $date = $this->request()->getValue('date');

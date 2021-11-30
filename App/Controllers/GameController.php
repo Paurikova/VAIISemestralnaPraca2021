@@ -10,21 +10,16 @@ class GameController extends AControllerRedirect
 
     public function index()
     {
-        // TODO: Implement index() method.
-    }
-
-    public function gameMenu() {
-        if (!Auth::isLogged()) {
-            $this->redirect('home');
+        if (Auth::isLogged()) {
+            $this->redirect('pin','pin');
+        } else {
+            $this->redirect('news','news');
         }
-        return $this->html(
-            []
-        );
     }
 
-    public function newGame() {
+    public function game() {
         if (!Auth::isLogged()) {
-            $this->redirect('home');
+            $this->redirect('news','news');
         }
         return $this->html(
             []

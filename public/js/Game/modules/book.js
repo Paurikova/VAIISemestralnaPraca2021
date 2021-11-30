@@ -4,7 +4,7 @@ class Book {
     timer = null;
     book = null;
     active = false;
-    backgroundPicture = ["url('/SemestralnaPraca2021/public/files/Game/book1.png')", "url('/SemestralnaPraca2021/public/files/Game/book2.png')", "url('/SemestralnaPraca2021/public/files/Game/book3.png')", "url('/SemestralnaPraca2021/public/files/Game/book4.png')","url('/SemestralnaPraca2021/public/files/Game/book5.png')"];
+    backgroundPicture = ["url('/VAIISemestralnaPraca2021/public/files/Game/book1.png')", "url('/VAIISemestralnaPraca2021/public/files/Game/book2.png')", "url('/VAIISemestralnaPraca2021/public/files/Game/book3.png')", "url('/VAIISemestralnaPraca2021/public/files/Game/book4.png')","url('/VAIISemestralnaPraca2021/public/files/Game/book5.png')"];
     constructor(interval) {
         this.timer = new Timer(interval);
         this.timer.callback = () => this.hideBook();
@@ -36,8 +36,8 @@ class Book {
         let book = this.book;
         let timer = setInterval(function() {
             let timePassed = Date.now() - start;
-            book.style.top = timePassed / 20 + 'px';
-            if (timePassed > 13000) clearInterval(timer);
+            book.style.top = timePassed / 10 + 'px';
+            if (timePassed > (window.outerWidth + 800)*10) clearInterval(timer);
         }, 20);
 
     }
@@ -63,10 +63,6 @@ class Book {
     }
     setActive() {
         this.active = false;
-    }
-
-    setPicture() {
-        this.book.style.backgroundImage = "url('../fly/img/stars1.png')";
     }
 }
 

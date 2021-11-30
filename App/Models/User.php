@@ -8,7 +8,7 @@ use App\Config\Configuration;
 class User extends Model
 {
     public function __construct(
-        public int $userID = 0,
+        public int $id = 0,
         public ?string $mail = null,
         public ?string $name = null,
         public ?string $surname = null,
@@ -18,7 +18,7 @@ class User extends Model
     }
     static public function setDbColumns()
     {
-        return ['userID','mail','name','surname','password'];
+        return ['id','mail','name','surname','password'];
     }
 
     static public function setTableName()
@@ -31,7 +31,7 @@ class User extends Model
      */
     public function getUserID(): int
     {
-        return $this->userID;
+        return $this->id;
     }
 
     /**
@@ -39,7 +39,7 @@ class User extends Model
      */
     public function setUserID(int $userID): void
     {
-        $this->userID = $userID;
+        $this->id = $userID;
     }
 
     /**

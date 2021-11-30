@@ -4,14 +4,11 @@ class Timer {
     timerId = null;
     _callback = null;
 
-
-
     constructor(interval = 1000) {
         this.interval = interval;
     }
 
     start() {
-        //this.stop();
         this.timerId = window.setInterval(this._callback, this.interval);
     }
 

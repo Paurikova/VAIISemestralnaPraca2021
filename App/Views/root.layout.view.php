@@ -24,31 +24,34 @@
     <script src="public/js/activeClassToolbar.js"></script>
     <!-- Game -->
     <script type="module" src="public/js/Game/main.js"></script>
+    <!--Chart-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 <body>
 <?php /** @var Array $data */ ?>
-<div class="row head">
-    <h1>PinBook</h1>
-</div>
-<nav class="topnav" id="myTopnav">
-    <?php if (App\Auth::isLogged()) { ?>
-        <a class="link" href="?c=pin&a=pin">My pins</a>
-        <a class="link" href="?c=challenge&a=challenge">My challenges</a>
-        <a class="link" href="?c=reading&a=reading">My reading</a>
-        <a class="link" href="?c=game&a=gameMenu">Game</a>
-        <a class="link" href="?c=auth&a=logout">Logout</a>
-    <?php } else { ?>
-        <a class="link" href="?c=news&a=news">News</a>
-        <a class="link" href="?c=auth&a=loginForm">Login</a>
-    <?php } ?>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-    </a>
-</nav>
-<div class="container-fluid">
-    <div class="row webside">
-        <?= $contentHTML ?>
+<div class="header">
+    <div class="row head">
+        <h1>PinBook</h1>
     </div>
+    <nav class="topnav" id="myTopnav">
+        <?php if (App\Auth::isLogged()) { ?>
+            <a class="link" href="?c=pin&a=pin">My pins</a>
+            <a class="link" href="?c=challenge&a=challenge">My challenges</a>
+            <a class="link" href="?c=reading&a=reading">My reading</a>
+            <a class="link" href="?c=game&a=game">Game</a>
+            <a class="link" href="?c=auth&a=myAccount">My account</a>
+            <a class="link" href="?c=auth&a=logout">Logout</a>
+        <?php } else { ?>
+            <a class="link" href="?c=news&a=news">News</a>
+            <a class="link" href="?c=auth&a=loginForm">Login</a>
+        <?php } ?>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </nav>
+</div>
+<div class="container-fluid">
+    <?= $contentHTML ?>
 </div>
 </body>
 </html>

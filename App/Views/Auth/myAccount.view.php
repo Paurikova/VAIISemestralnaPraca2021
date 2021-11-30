@@ -9,29 +9,36 @@
                         <?= $data['error'] ?>
                     </div>
                 <?php } ?>
-                <form method="post" action="?c=auth&a=registration">
+                <?php if($data['success'] != "") { ?>
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <?= $data['success'] ?>
+                    </div>
+                <?php } ?>
+                <form method="post" class="form-group" action="?c=auth&a=modifyAccount">
                     <div class="mb-3">
                         <label for="FormControlInput1" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" id="FormControlInput1" required>
+                        <input type="text" class="form-control" name="name" id="FormControlInput1" placeholder="<?=$data['myAccount']->getName() ?>">
                     </div>
                     <div class="mb-3">
                         <label for="FormControlInput2" class="form-label">Surname</label>
-                        <input type="text" class="form-control" name="surname" id="FormControlInput2" required>
+                        <input type="text" class="form-control" name="surname" id="FormControlInput2" placeholder="<?=$data['myAccount']->getSurname() ?>">
                     </div>
                     <div class="mb-3">
                         <label for="FormControlInput3" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="mail" id="FormControlInput3" required>
+                        <input type="email" class="form-control" name="mail" id="FormControlInput3" placeholder="<?=$data['myAccount']->getMail() ?>">
                     </div>
                     <div class="mb-3">
                         <label for="FormControlInput4" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password1" id="FormControlInput4" required>
+                        <input type="password" class="form-control" name="password1" id="FormControlInput4">
                     </div>
                     <div class="mb-3">
                         <label for="FormControlInput5" class="form-label">Password verification</label>
-                        <input type="password" class="form-control" name="password2" id="FormControlInput5" required>
+                        <input type="password" class="form-control" name="password2" id="FormControlInput5">
                     </div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Register</button>
+                    <div class="mb-3 textCenter">
+                        <button type="submit" class="btn btn-primary">Modify</button>
+                        <a href="?c=auth&a=deleteAccount">Remove</a>
                     </div>
                 </form>
             </div>

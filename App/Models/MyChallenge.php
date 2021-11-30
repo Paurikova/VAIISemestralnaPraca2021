@@ -88,4 +88,17 @@ class MyChallenge  extends Model
     {
         $this->challengeID = $challengeID;
     }
+
+    public static function deleteAll(): bool
+    {
+        try {
+            $all = MyChallenge::getAll('userID = ?', [$_SESSION['userID']]);
+            foreach ($all as $one) {
+                $one->delete();
+            }
+            return true;
+        }catch (\Exception $e) {
+            return false;
+        }
+    }
 }
