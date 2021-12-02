@@ -18,11 +18,11 @@
                 <form method="post" class="form-group" action="?c=auth&a=login">
                     <div class="mb-3">
                         <label for="ControlInput1" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="login" id="ControlInput1" required>
+                        <input type="email" class="form-control" maxlength="<?= \App\Config\Configuration::MAX_LENGTH_30?>" name="login" id="ControlInput1" required>
                     </div>
                     <div class="mb-3">
                         <label for="ControlInput2" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" id="ControlInput2" required>
+                        <input type="password" class="form-control" maxlength="<?= \App\Config\Configuration::MAX_LENGTH_30?>" name="password" id="ControlInput2" required>
                     </div>
                     <div class="mb-3 textCenter">
                         <button type="submit" class="btn btn-primary">Login</button>
