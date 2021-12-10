@@ -98,7 +98,7 @@ class AuthController extends AControllerRedirect
                 $user->setMail($mail);
                 $user->setName($name);
                 $user->setSurname($surname);
-                $user->setPassword($password1);
+                $user->setPassword(password_hash($password1, PASSWORD_DEFAULT));
                 try {
                     $user->save();
                 } catch (\Exception $e) {
@@ -156,8 +156,8 @@ class AuthController extends AControllerRedirect
                 $modification[] = 'mail';
                 $modified = true;
             }
-            if (User::controlIdentification($password1) and User::controlIdentification($password2 and $password1 == $password2)) {
-                $myAccount->setPassword($password1);
+            if (User::controlIdentification($password1) and User::controlIdentification($password2) and $password1 == $password2) {
+                $myAccount->setPassword(password_hash($password1,PASSWORD_DEFAULT));
                 $modification[] = 'password';
                 $modified = true;
             }

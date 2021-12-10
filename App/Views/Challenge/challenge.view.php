@@ -21,20 +21,6 @@
                         <div class="card-body">
                             <p class="card-title"><?= $challenge->getTitle() ?></p>
                             <div class="card-text"><?= $challenge->getText() ?></div>
-                            <div class="myAddBar w3-light-grey w3-round-xlarge">
-                                <div id="<?= $challenge->getId()?>" class="w3-container w3-round-xlarge"></div>
-                            </div>
-                            <div class="myAddButton">
-                                <button onclick="myFunction(<?= $challenge->getId() ?>)" class="w3-button w3-round-xlarge">Add</button>
-                                <!--<script>
-                                    function myFunction(id) {
-
-                                        document.getElementById("id");
-                                        alert(id);
-
-                                    }
-                                </script>-->
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,8 +34,6 @@
                             <a href="?c=challenge&a=newChallenge" role="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-plus"></i></a>
                         </div>
                         <div class="card-text"></div>
-                        <div class="myAddBar"></div>
-                        <div class="myAddButton"></div>
                     </div>
                 </div>
             </div>
