@@ -4,15 +4,15 @@
         <div id="carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <?php for ($i = 0; $i< 3; $i++) { ?>
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="<?= $i ?>"
-                    <?php if ($i == 1) { ?> class="active" <?php } ?> aria-current="true" aria-label="Slide"></button>
+                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="<?= $i ?>"
+                        <?php if ($i == 1) { ?> class="active" <?php } ?> aria-current="true" aria-label="Slide"></button>
                 <?php } ?>
             </div>
             <div class="carousel-inner">
                 <?php for ($i = 0; $i < 3; $i++) { ?>
-                <div class="carousel-item <?php if ($i == 1) { ?> active <?php } ?>">
-                    <img src="<?= \App\Config\Configuration::UPLOAD_DIR_NEWS . $data['new']->getPicture($i + 1)?>" alt="Picture" class="d-block">
-                </div>
+                    <div class="carousel-item <?php if ($i == 1) { ?> active <?php } ?>">
+                        <img src="<?= \App\Config\Configuration::UPLOAD_DIR_NEWS . $data['new']->getPicture($i + 1)?>" alt="Picture" class="d-block">
+                    </div>
                 <?php } ?>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
@@ -24,8 +24,6 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <h3> <?= $data['new']->getTitle() ?> </h3>
-        <h4> Author: <?= $data['new']->getAuthor() ?> </h4>
-        <p> <?= $data['new']->getText() ?> </p>
+        <div id = "newBody"></div>
     </div>
 </div>

@@ -24,42 +24,73 @@ class ReadingController extends AControllerRedirect
         if (!Auth::isLogged()) {
             $this->redirect('news','news');
         }
-        try {
-            $news = News::getAll();
-            $year = date("Y");
-            $January = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'1',$year]);
-            $February = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'2',$year]);
-            $March = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'3',$year]);
-            $April = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'4',$year]);
-            $May = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'5',$year]);
-            $June = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'6',$year]);
-            $July = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'7',$year]);
-            $August = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'8',$year]);
-            $September = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'9',$year]);
-            $October = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'10',$year]);
-            $November = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'11',$year]);
-            $December = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'12',$year]);
-        } catch (\Exception $e) {
-            $this->redirect('reading','reading',['error' => $e->getMessage()]);
-        }
-        return $this->html(
-            [
-                'January' => $January,
-                'February' => $February,
-                'March' => $March,
-                'April' => $April,
-                'May' => $May,
-                'June' => $June,
-                'July' => $July,
-                'August' => $August,
-                'September' => $September,
-                'October' => $October,
-                'November' => $November,
-                'December' => $December,
-                'error' => $this->request()->getValue('error'),
-                'news' => $news
-            ]
-        );
+        return $this->html([]);
+    }
+
+    public function getTimesInYear() {
+        $year = date("Y");
+        $minutes = [];
+        $January = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'1',$year]);
+        if ($January == null)
+            $minutes[0] = 0;
+        else
+            $minutes[0] = $January[0]->getTime();
+        $February = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'2',$year]);
+        if ($February == null)
+            $minutes[1] = 0;
+        else
+            $minutes[1] = $February[0]->getTime();
+        $March = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'3',$year]);
+        if ($March == null)
+            $minutes[2] = 0;
+        else
+            $minutes[2] = $March[0]->getTime();
+        $April = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'4',$year]);
+        if ($April == null)
+            $minutes[3] = 0;
+        else
+            $minutes[3] = $April[0]->getTime();
+        $May = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'5',$year]);
+        if ($May == null)
+            $minutes[4] = 0;
+        else
+            $minutes[4] = $May[0]->getTime();
+        $June = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'6',$year]);
+        if ($June == null)
+            $minutes[5] = 0;
+        else
+            $minutes[5] = $June[0]->getTime();
+        $July = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'7',$year]);
+        if ($July == null)
+            $minutes[6] = 0;
+        else
+            $minutes[6] = $July[0]->getTime();
+        $August = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'8',$year]);
+        if ($August == null)
+            $minutes[7] = 0;
+        else
+            $minutes[7] = $August[0]->getTime();
+        $September = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'9',$year]);
+        if ($September == null)
+            $minutes[8] = 0;
+        else
+            $minutes[8] = $September[0]->getTime();
+        $October = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'10',$year]);
+        if ($October == null)
+            $minutes[9] = 0;
+        else
+            $minutes[9] = $October[0]->getTime();
+        $November = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'11',$year]);
+        if ($November == null)
+            $minutes[10] = 0;
+        else
+            $minutes[10] = $November[0]->getTime();
+        $December = Reading::getAll('userID = ? and month = ? and year = ?',[$_SESSION['userID'],'12',$year]);
+        if ($December == null)
+            $minutes[11] = 0;
+        else
+            $minutes[11] = $December[0]->getTime();
+        return $this->json($minutes);
     }
 
     public function addReading(){
@@ -86,7 +117,7 @@ class ReadingController extends AControllerRedirect
                         try {
                             $reading[0]->save();
                         } catch (\Exception $e) {
-                            $this->redirect('reading', ['error' => $e->getMessage()]);
+                            return $this.json('error');
                         }
                     } else if (count($reading) == 0) {
                         $newReading = new Reading();
@@ -96,17 +127,17 @@ class ReadingController extends AControllerRedirect
                         $newReading->setTime($totalTime);
                         $newReading->save();
                     } else {
-                        $this->redirect('reading','reading', ['error' => 'Incorrect data!']);
+                        return $this->json('error');
                     }
                 } else {
-                    $this->redirect('reading','reading', ['error' => 'Incorrect data!']);
+                    return $this->json('error');
                 }
             } else {
-                $this->redirect('reading', 'reading', ['error' => 'Incorrect data!']);
+                return $this->json('error');
             }
-            $this->redirect('reading','reading');
+            return $this->json('Correct data!');
         } catch (\Exception $e) {
-            $this->redirect('reading', ['error' => $e->getMessage()]);
+            return $this->json('error');
         }
     }
 }

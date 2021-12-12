@@ -47,4 +47,15 @@ class NewsController extends AControllerRedirect
                 'new' => $new
             ]);
     }
+
+    public function getOneNew()
+    {
+        try {
+            $new = News::getOne($this->request()->getValue('newID'));
+            return $this->json($new);
+        } catch (\Exception $e) {
+            $this->redirect('news','news',['error' => $e->getMessage()]);
+        }
+    }
+
 }

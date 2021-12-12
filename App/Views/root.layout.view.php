@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Button-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!--moje css-->
     <link rel="stylesheet" href="public/css.css">
     <!--nav bar-->
@@ -24,8 +26,10 @@
     <script src="public/js/activeClassToolbar.js"></script>
     <!-- Game -->
     <script type="module" src="public/js/Game/main.js"></script>
+    <!-- Chart -->
+    <script src="public/js/graph.js"></script>
     <!--Chart-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>-->
 </head>
 <body>
 <?php /** @var Array $data */ ?>
