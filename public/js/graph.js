@@ -1,5 +1,4 @@
 let chart;
-let xhr = new XMLHttpRequest();
 
 function createChart() {
     let options = {
@@ -76,47 +75,47 @@ function createChart() {
 }
 
 function readingChart() {
-   //ZMENA
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '?c=reading&a=getTimesInYear');
     xhr.onreadystatechange = function () {
         if (xhr.status === 200) {
             let result = JSON.parse(xhr.responseText);
             chart.updateSeries([{
-                data: [result[0],result[1],result[2],result[3],result[5],result[6], result[7], result[8], result[9], result[10], result[11]]
+                data: [result[0],result[1],result[2],result[3],result[4],result[5],result[6], result[7], result[8], result[9], result[10], result[11]]
             }])
         } else {
             console.log('Request failed.  Returned status of ' + xhr.status);
         }
     };
-    xhr.open('GET', '?c=reading&a=getTimesInYear');
     xhr.send();
 }
 
-//nefunguje readingchart
 function sendTime() {
     let date = document.getElementById("date").value;
     let time = document.getElementById("time").value;
-    //let xhrRwquest = new XMLHttpRequest();
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    // xhr.onreadystatechange = function () { // Call a function when the state changes.
-    //     if (xhr.status === 200) {
-    //         let result = JSON.parse(xhr.responseText);
-    //         if (result == 'error') {
-    //             alert(result)
-    //         }
-    //     } else {
-    //         console.log('Request failed.  Returned status of ' + xhr.status);
-    //     }
-    // }
-    xhr.open('POST', '?c=reading&a=addReading&date=' + date + '&time=' + time, true);
-    xhr.send();
+    let xhrRequest = new XMLHttpRequest();
+    xhrRequest.open('POST', '?c=reading&a=addReading&date=' + date + '&time=' + time, true);
+    xhrRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhrRequest.onreadystatechange = function () {
+        if (xhrRequest.status === 200) {
+            let result = JSON.parse(xhrRequest.responseText);
+            if (result == 'success') {
+                readingChart()
+            }
+        } else {
+            console.log('Request failed.  Returned status of ' + xhrRequest.status);
+        }
+    }
+    xhrRequest.send();
 }
 
 window.onload = function () {
-    createChart();
-    readingChart();
-    document.getElementById("newReading").onclick = () => {
-        sendTime();
+    if (window.location.href.split("/")[4] == '?c=reading&a=reading') {
+        createChart();
         readingChart();
+        document.getElementById("newReading").onclick = () => {
+            sendTime();
+        }
     }
 };
 

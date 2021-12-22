@@ -10,7 +10,7 @@
                     </div>
                 <?php } ?>
             </div>
-            <form class="changePin" method="post" action="?c=pin&a=changePin">
+            <form class="changePin" method="post" action="?c=pin&a=changePin" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="idPin">Your pins</label>
                     <select class="form-select" name="idPin">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Title">Title</label>
-                    <input name="title" maxlength="<?= \App\Config\Configuration::MAX_LENGTH_30?>" class="form-control" required>
+                    <input name="title" maxlength="<?= \App\Config\Configuration::MAX_LENGTH_30?>" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="Notes">Notes</label>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                     <label for="File">File input</label>
-                    <input type="file" class="form-control-file" maxlength="<?= \App\Config\Configuration::MAX_LENGTH_30?>" name="file">
+                    <input type="file" class="form-control-file" name="file">
                 </div>
                 <div class="form-group">
                     <input role="button" type="submit" class="btn btn-primary" name="pin" value="Modify">

@@ -135,7 +135,7 @@ class ReadingController extends AControllerRedirect
             } else {
                 return $this->json('error');
             }
-            return $this->json('Correct data!');
+            return $this->json('success');
         } catch (\Exception $e) {
             return $this->json('error');
         }

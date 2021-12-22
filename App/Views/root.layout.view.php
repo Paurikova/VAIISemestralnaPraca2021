@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="public/css.css">
     <!--nav bar-->
     <script src="public/js/navbar.js"></script>
-    <!--datum pre reading-->
-    <script src="public/js/date.js"></script>
     <!--posuvanie fotiek-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Compiled and minified JavaScript -->
@@ -28,8 +26,6 @@
     <script type="module" src="public/js/Game/main.js"></script>
     <!-- Chart -->
     <script src="public/js/graph.js"></script>
-    <!--Chart-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>-->
 </head>
 <body>
 <?php /** @var Array $data */ ?>

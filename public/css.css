@@ -446,3 +446,7 @@ body {
 .chart {
     padding-left: 100px;
 }
+
+#newReading:hover, #newReading:active, #newReading:focus {
+    background-color: #e53935 !important;
+}

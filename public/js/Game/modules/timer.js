@@ -1,3 +1,4 @@
+//trieda prevzata zo zbiery uloh a upravena
 class Timer {
 
     interval;

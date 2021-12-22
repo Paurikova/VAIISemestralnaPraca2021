@@ -105,8 +105,10 @@ class PinController extends AControllerRedirect
             $title = $this->request()->getValue('title');
             $text = $this->request()->getValue('text');
             $stars = $this->request()->getValue('stars');
-            if ($changePin != null and Pin::controlTitle($title)) {
-                $changePin->setTitle($title);
+            if ($changePin != null) {
+                if ($title != null and Pin::controlTitle($title)) {
+                    $changePin->setTitle($title);
+                }
                 if ($text != null and Pin::controlText($text)) {
                     $changePin->setText($this->request()->getValue('text'));
                 }
@@ -117,12 +119,13 @@ class PinController extends AControllerRedirect
                 $changePin->save();
                 $this->redirect('pin','pin');
             } else {
-                $this->redirect('pin','modifyPin',['error' => 'Incorrect data']);
+                $this->redirect('pin','modifyPin',['error' => 'Incorrect data!']);
             }
         } catch (\Exception $e) {
             $this->redirect('pin','modifyPin',['error' => $e->getMessage()]);
         }
     }
+
 
     public function deletePin() {
         if (!Auth::isLogged()) {

@@ -24,6 +24,8 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <div id = "newBody"></div>
+        <h3> <?= $data['new']->getTitle() ?> </h3>
+        <h4> Author: <?= $data['new']->getAuthor() ?> </h4>
+        <p> <?= $data['new']->getText() ?> </p>
     </div>
 </div>
